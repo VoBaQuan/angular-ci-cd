@@ -43,7 +43,7 @@ jobs:
 
       # 5. Chạy Unit Test (Karma headless)
       - name: Run Unit Tests
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
+        run: npm run test -- --run
 
       # 6. Build production với base-href cho GitHub Pages
       - name: Build
