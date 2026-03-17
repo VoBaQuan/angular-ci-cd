@@ -41,21 +41,21 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-      # # 5. Chạy Unit Test (Karma headless)
+      # 5. Chạy Unit Test (Vitest)
       # - name: Run Unit Tests
       #   run: npm run test:ci
 
       # 6. Build production với base-href cho GitHub Pages
       - name: Build
         run: npm run build -- --base-href /angular-ci-cd/
-        # ⚠️ Thay my-angular-app bằng tên repo GitHub của bạn
+        # ⚠️ Thay angular-ci-cd bằng tên repo GitHub của bạn
 
       # 7. Upload artifact để job CD sử dụng
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/angular-ci-cd/browser
-          # ⚠️ Kiểm tra lại đường dẫn này trong angular.json
+          path: dist/test-cicd/browser
+          # Nếu lỗi "No such file or directory" thì thử đổi thành dist/test-cicd
 
   # ─────────────────────────────────────────
   # JOB 2: CD — Deploy lên GitHub Pages
