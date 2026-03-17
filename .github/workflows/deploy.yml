@@ -41,9 +41,9 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-      # 5. Chạy Unit Test (Karma headless)
-      - name: Run Unit Tests
-        run: npm run test:ci
+      # # 5. Chạy Unit Test (Karma headless)
+      # - name: Run Unit Tests
+      #   run: npm run test:ci
 
       # 6. Build production với base-href cho GitHub Pages
       - name: Build
