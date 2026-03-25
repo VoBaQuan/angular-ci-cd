@@ -1,0 +1,48 @@
+@switch (quiz.status()) {
+  @case ('idle') {
+    <app-start />
+  }
+
+  @case ('playing') {
+    <app-question
+      [question]="quiz.currentQuestion()"
+      [selectedAnswer]="quiz.selectedAnswer()"
+      [currentIndex]="quiz.currentIndex()"
+      [total]="quiz.total()"
+      (answerSelected)="quiz.selectAnswer($event)"
+    />
+
+    <!-- Navigation footer -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-lg px-6 py-4 flex justify-between items-center max-w-xl mx-auto">
+      <button
+        (click)="quiz.prev()"
+        [disabled]="quiz.currentIndex() === 0"
+        class="px-5 py-2 rounded-xl border-2 border-gray-200 text-gray-600 font-medium hover:border-indigo-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+      >
+        ← Quay lại
+      </button>
+
+      <span class="text-xs text-gray-400">
+        {{ quiz.answers().filter(a => a !== null).length }} / {{ quiz.total() }} đã trả lời
+      </span>
+
+      <button
+        (click)="quiz.next()"
+        [disabled]="!quiz.isAnswered()"
+        class="px-5 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+      >
+        @if (quiz.isLastQuestion()) { Xem kết quả } @else { Tiếp theo → }
+      </button>
+    </div>
+  }
+
+  @case ('finished') {
+    <app-result
+      [score]="quiz.score()"
+      [total]="quiz.total()"
+      [questions]="quiz.questions()"
+      [answers]="quiz.answers()"
+      (restart)="quiz.restart()"
+    />
+  }
+}
