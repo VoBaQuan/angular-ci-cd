@@ -4,15 +4,28 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { QUIZ_QUESTIONS } from './quiz.data';
-import { QuizQuestion, QuizStatus } from './quiz.model';
+import { MultiLangQuizQuestion, QuizQuestion, QuizStatus } from './quiz.model';
+import { I18nService } from '../i18n/i18n.service';
 
 @Injectable({ providedIn: 'root' })
 export class QuizStateService {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly i18n = inject(I18nService);
 
   // ── Simulate async loading with toSignal() ──────────────────────────────
-  private readonly questions$ = of(QUIZ_QUESTIONS).pipe(delay(600));
-  readonly questions = toSignal(this.questions$, { initialValue: [] as QuizQuestion[] });
+  private readonly rawQuestions$ = of(QUIZ_QUESTIONS).pipe(delay(600));
+  private readonly rawQuestions = toSignal(this.rawQuestions$, {
+    initialValue: [] as MultiLangQuizQuestion[],
+  });
+
+  // ── Localized questions (derived from raw + current language) ───────────
+  readonly questions = computed<QuizQuestion[]>(() =>
+    this.rawQuestions().map((q) => ({
+      id: q.id,
+      correctIndex: q.correctIndex,
+      ...q.translations[this.i18n.lang()],
+    }))
+  );
 
   // ── Writable signals (mutable state) ───────────────────────────────────
   readonly status = signal<QuizStatus>('idle');
@@ -20,7 +33,7 @@ export class QuizStateService {
   readonly answers = signal<(number | null)[]>([]);
 
   // ── Computed signals (derived, read-only) ──────────────────────────────
-  readonly loading = computed<boolean>(() => this.questions().length === 0);
+  readonly loading = computed<boolean>(() => this.rawQuestions().length === 0);
   readonly total = computed(() => this.questions().length);
   readonly currentQuestion = computed(() => this.questions()[this.currentIndex()]);
   readonly selectedAnswer = computed(() => this.answers()[this.currentIndex()] ?? null);
@@ -29,7 +42,7 @@ export class QuizStateService {
   readonly progress = computed(() => ((this.currentIndex() + 1) / this.total()) * 100);
   readonly score = computed(() =>
     this.answers().filter(
-      (answer, i) => answer !== null && answer === this.questions()[i]?.correctIndex
+      (answer, i) => answer !== null && answer === this.rawQuestions()[i]?.correctIndex
     ).length
   );
   readonly scorePercent = computed(() =>
@@ -53,17 +66,12 @@ export class QuizStateService {
   }
 
   selectAnswer(optionIndex: number): void {
-    console.log(this.answers());
-
     if (this.isAnswered()) return;
     this.answers.update((prev) => {
       const next = [...prev];
       next[this.currentIndex()] = optionIndex;
       return next;
     });
-
-    console.log(this.selectedAnswer());
-    console.log(this.answers());
   }
 
   next(): void {

@@ -3,6 +3,7 @@ import { QuizStateService } from './quiz-state.service';
 import { StartComponent } from './start/start';
 import { QuestionComponent } from './question/question';
 import { ResultComponent } from './result/result';
+import { I18nService } from '../i18n/i18n.service';
 
 @Component({
   selector: 'app-quiz',
@@ -11,4 +12,5 @@ import { ResultComponent } from './result/result';
 })
 export class QuizComponent {
   protected readonly quiz = inject(QuizStateService);
+  protected readonly i18n = inject(I18nService);
 }

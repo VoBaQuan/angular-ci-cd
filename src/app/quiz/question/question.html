@@ -3,7 +3,7 @@
 
     <!-- Progress header -->
     <div class="flex items-center justify-between mb-3 text-sm font-medium text-gray-500">
-      <span>Câu {{ currentIndex() + 1 }} / {{ total() }}</span>
+      <span>{{ i18n.t().question.label }} {{ currentIndex() + 1 }} / {{ total() }}</span>
       <span class="text-indigo-600 font-semibold">{{ progressPercent() | number: '1.0-0' }}%</span>
     </div>
 
@@ -48,9 +48,9 @@
         [class]="isCorrect ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'"
       >
         @if (isCorrect) {
-          🎉 Chính xác!
+          {{ i18n.t().question.correct }}
         } @else {
-          💡 Đáp án đúng: <strong>{{ question().options[question().correctIndex] }}</strong>
+          {{ i18n.t().question.wrongPrefix }} <strong>{{ question().options[question().correctIndex] }}</strong>
         }
       </div>
     }

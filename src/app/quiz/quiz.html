@@ -1,3 +1,16 @@
+<!-- Language switcher -->
+<div class="fixed top-4 right-4 z-50 flex gap-1 bg-white/80 backdrop-blur rounded-xl shadow-md p-1">
+  @for (l of i18n.langs; track l) {
+    <button
+      (click)="i18n.setLang(l)"
+      class="px-2 py-1 rounded-lg text-xs font-semibold transition-all"
+      [class]="i18n.lang() === l ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:bg-gray-100'"
+    >
+      {{ i18n.langFlags[l] }} {{ i18n.langLabels[l] }}
+    </button>
+  }
+</div>
+
 @switch (quiz.status()) {
   @case ('idle') {
     <app-start />
@@ -19,11 +32,11 @@
         [disabled]="quiz.currentIndex() === 0"
         class="px-5 py-2 rounded-xl border-2 border-gray-200 text-gray-600 font-medium hover:border-indigo-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
-        ← Quay lại
+        {{ i18n.t().quiz.back }}
       </button>
 
       <span class="text-xs text-gray-400">
-        {{ quiz.answers().filter(a => a !== null).length }} / {{ quiz.total() }} đã trả lời
+        {{ quiz.answers().filter(a => a !== null).length }} / {{ quiz.total() }} {{ i18n.t().quiz.answered }}
       </span>
 
       <button
@@ -31,7 +44,7 @@
         [disabled]="!quiz.isAnswered()"
         class="px-5 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
-        @if (quiz.isLastQuestion()) { Xem kết quả } @else { Tiếp theo → }
+        @if (quiz.isLastQuestion()) { {{ i18n.t().quiz.seeResults }} } @else { {{ i18n.t().quiz.next }} }
       </button>
     </div>
   }

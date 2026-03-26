@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 p-4">
   <div class="bg-white rounded-3xl shadow-xl p-8 max-w-xl w-full">
 
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Kết quả</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">{{ i18n.t().result.title }}</h2>
 
     <!-- Score ring -->
     <div class="flex justify-center mb-4">
@@ -46,8 +46,8 @@
           @if (isCorrect) {
             <p class="text-green-700">✅ {{ q.options[q.correctIndex] }}</p>
           } @else {
-            <p class="text-red-600">❌ Bạn chọn: {{ userAnswer !== null ? q.options[userAnswer!] : 'Chưa trả lời' }}</p>
-            <p class="text-green-700 mt-0.5">✅ Đáp án: {{ q.options[q.correctIndex] }}</p>
+            <p class="text-red-600">❌ {{ i18n.t().result.youChose }} {{ userAnswer !== null ? q.options[userAnswer!] : i18n.t().result.notAnswered }}</p>
+            <p class="text-green-700 mt-0.5">✅ {{ i18n.t().result.correctAnswer }} {{ q.options[q.correctIndex] }}</p>
           }
         </div>
       }
@@ -57,7 +57,7 @@
       (click)="restart.emit()"
       class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-semibold rounded-xl transition-all duration-150 text-base"
     >
-      🔄 Làm lại
+      {{ i18n.t().result.restart }}
     </button>
   </div>
 </div>

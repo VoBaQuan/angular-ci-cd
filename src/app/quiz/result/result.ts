@@ -1,11 +1,14 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { QuizQuestion } from '../quiz.model';
+import { I18nService } from '../../i18n/i18n.service';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.html',
 })
 export class ResultComponent {
+  protected readonly i18n = inject(I18nService);
+
   // signal-based inputs
   score = input.required<number>();
   total = input.required<number>();
@@ -22,10 +25,11 @@ export class ResultComponent {
 
   protected readonly message = computed(() => {
     const p = this.percent();
-    if (p === 100) return { text: 'Xuất sắc! Bạn nắm vững Angular Signals! 🏆', color: 'text-yellow-600' };
-    if (p >= 80)  return { text: 'Rất tốt! Chỉ còn một chút nữa thôi! 🎉', color: 'text-green-600' };
-    if (p >= 60)  return { text: 'Khá tốt! Hãy ôn lại những câu sai nhé. 💪', color: 'text-blue-600' };
-    return { text: 'Cần ôn tập thêm về Angular Signals. 📚', color: 'text-red-500' };
+    const t = this.i18n.t().result;
+    if (p === 100) return { text: t.perfect, color: 'text-yellow-600' };
+    if (p >= 80)   return { text: t.great, color: 'text-green-600' };
+    if (p >= 60)   return { text: t.good, color: 'text-blue-600' };
+    return { text: t.needPractice, color: 'text-red-500' };
   });
 
   protected readonly ringColor = computed(() => {

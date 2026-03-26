@@ -1,6 +1,7 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { QuizQuestion } from '../quiz.model';
+import { I18nService } from '../../i18n/i18n.service';
 
 @Component({
   selector: 'app-question',
@@ -8,6 +9,8 @@ import { QuizQuestion } from '../quiz.model';
   templateUrl: './question.html',
 })
 export class QuestionComponent {
+  protected readonly i18n = inject(I18nService);
+
   // signal-based inputs
   question = input.required<QuizQuestion>();
   selectedAnswer = input<number | null>(null);
