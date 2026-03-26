@@ -47,7 +47,7 @@ jobs:
 
       # 6. Build production với base-href cho GitHub Pages
       - name: Build
-        run: npm run build -- --base-href /angular-ci-cd/
+        run: npm run build -- --base-href /angular-signal/
         # ⚠️ Thay angular-ci-cd bằng tên repo GitHub của bạn
 
       # 7. Upload artifact để job CD sử dụng
