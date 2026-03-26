@@ -17,6 +17,8 @@ export class QuestionComponent {
   selectedAnswer = input<number | null>(null);
   currentIndex = input.required<number>();
   total = input.required<number>();
+  timeLeft = input<number>(30);
+  timerEnabled = input<boolean>(false);
 
   // signal-based output
   answerSelected = output<number>();

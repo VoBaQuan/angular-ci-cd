@@ -11,7 +11,7 @@
     @if (quiz.loading()) {
       <p class="text-indigo-400 animate-pulse mb-6">{{ i18n.t().start.loading }}</p>
     } @else {
-      <div class="flex justify-center gap-6 mb-8 text-sm text-gray-600">
+      <div class="flex justify-center gap-6 mb-6 text-sm text-gray-600">
         <div class="flex flex-col items-center gap-1">
           <span class="text-2xl font-bold text-indigo-600">{{ quiz.total() }}</span>
           <span>{{ i18n.t().start.questions }}</span>
@@ -25,6 +25,43 @@
         <div class="flex flex-col items-center gap-1">
           <span class="text-2xl font-bold text-indigo-600">1</span>
           <span>{{ i18n.t().start.oneChoice }}</span>
+        </div>
+      </div>
+
+      <!-- Settings toggles -->
+      <div class="flex flex-col gap-3 mb-8">
+        <div class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-gray-50 border border-gray-200">
+          <div class="flex items-center gap-2">
+            <lucide-icon name="shuffle" [size]="18" class="text-indigo-500"></lucide-icon>
+            <span class="text-sm font-medium text-gray-700">{{ i18n.t().controls.shuffle }}</span>
+          </div>
+          <div
+            (click)="quiz.shuffleEnabled.set(!quiz.shuffleEnabled())"
+            class="relative w-11 h-6 rounded-full transition-colors duration-200 cursor-pointer"
+            [class]="quiz.shuffleEnabled() ? 'bg-indigo-600' : 'bg-gray-300'"
+          >
+            <span
+              class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"
+              [class]="quiz.shuffleEnabled() ? 'translate-x-5' : 'translate-x-0'"
+            ></span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-gray-50 border border-gray-200">
+          <div class="flex items-center gap-2">
+            <lucide-icon name="clock" [size]="18" class="text-indigo-500"></lucide-icon>
+            <span class="text-sm font-medium text-gray-700">{{ i18n.t().controls.timer }}</span>
+          </div>
+          <div
+            (click)="quiz.timerEnabled.set(!quiz.timerEnabled())"
+            class="relative w-11 h-6 rounded-full transition-colors duration-200 cursor-pointer"
+            [class]="quiz.timerEnabled() ? 'bg-indigo-600' : 'bg-gray-300'"
+          >
+            <span
+              class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"
+              [class]="quiz.timerEnabled() ? 'translate-x-5' : 'translate-x-0'"
+            ></span>
+          </div>
         </div>
       </div>
 

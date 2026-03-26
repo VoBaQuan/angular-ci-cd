@@ -4,7 +4,18 @@
     <!-- Progress header -->
     <div class="flex items-center justify-between mb-3 text-sm font-medium text-gray-500">
       <span>{{ i18n.t().question.label }} {{ currentIndex() + 1 }} / {{ total() }}</span>
-      <span class="text-indigo-600 font-semibold">{{ progressPercent() | number: '1.0-0' }}%</span>
+      <div class="flex items-center gap-2">
+        @if (timerEnabled()) {
+          <span
+            class="flex items-center gap-1 px-2 py-0.5 rounded-lg font-bold text-sm transition-colors"
+            [class]="timeLeft() <= 10 ? 'bg-red-100 text-red-600' : 'bg-indigo-50 text-indigo-600'"
+          >
+            <lucide-icon name="clock" [size]="14"></lucide-icon>
+            {{ timeLeft() }}{{ i18n.t().timer.sec }}
+          </span>
+        }
+        <span class="text-indigo-600 font-semibold">{{ progressPercent() | number: '1.0-0' }}%</span>
+      </div>
     </div>
 
     <!-- Progress bar -->

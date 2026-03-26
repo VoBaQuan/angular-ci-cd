@@ -10,10 +10,18 @@ export interface Translations {
     start: string;
     note: string;
   };
+  controls: {
+    shuffle: string;
+    timer: string;
+  };
   question: {
     label: string;
     correct: string;
     wrongPrefix: string;
+  };
+  timer: {
+    timeUp: string;
+    sec: string;
   };
   quiz: {
     back: string;
@@ -31,6 +39,11 @@ export interface Translations {
     notAnswered: string;
     correctAnswer: string;
     restart: string;
+  };
+  history: {
+    title: string;
+    empty: string;
+    clear: string;
   };
 }
 
@@ -57,10 +70,18 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       start: 'Start',
       note: 'Each question allows only one answer, no changes allowed',
     },
+    controls: {
+      shuffle: 'Shuffle Questions',
+      timer: '30s Timer',
+    },
     question: {
       label: 'Question',
       correct: 'Correct!',
       wrongPrefix: 'Correct answer:',
+    },
+    timer: {
+      timeUp: "Time's up!",
+      sec: 's',
     },
     quiz: {
       back: 'Back',
@@ -79,6 +100,11 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       correctAnswer: 'Answer:',
       restart: 'Restart',
     },
+    history: {
+      title: 'Recent Scores',
+      empty: 'No history yet',
+      clear: 'Clear',
+    },
   },
   vi: {
     start: {
@@ -90,10 +116,18 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       start: 'Bắt đầu',
       note: 'Mỗi câu chỉ được chọn một lần, không thể đổi lại',
     },
+    controls: {
+      shuffle: 'Xáo trộn câu hỏi',
+      timer: 'Đếm ngược 30s',
+    },
     question: {
       label: 'Câu',
       correct: 'Chính xác!',
       wrongPrefix: 'Đáp án đúng:',
+    },
+    timer: {
+      timeUp: 'Hết giờ!',
+      sec: 's',
     },
     quiz: {
       back: 'Quay lại',
@@ -112,6 +146,11 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       correctAnswer: 'Đáp án:',
       restart: 'Làm lại',
     },
+    history: {
+      title: 'Điểm gần đây',
+      empty: 'Chưa có lịch sử',
+      clear: 'Xóa',
+    },
   },
   zh: {
     start: {
@@ -123,10 +162,18 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       start: '开始',
       note: '每题只能选择一次，不可更改',
     },
+    controls: {
+      shuffle: '随机题目',
+      timer: '30秒计时',
+    },
     question: {
       label: '题目',
       correct: '回答正确！',
       wrongPrefix: '正确答案：',
+    },
+    timer: {
+      timeUp: '时间到！',
+      sec: '秒',
     },
     quiz: {
       back: '上一题',
@@ -144,6 +191,11 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       notAnswered: '未作答',
       correctAnswer: '正确答案：',
       restart: '重新开始',
+    },
+    history: {
+      title: '最近成绩',
+      empty: '暂无记录',
+      clear: '清除',
     },
   },
 };

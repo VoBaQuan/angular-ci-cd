@@ -7,6 +7,7 @@ import {
   Zap, Play, ChevronLeft, ChevronRight,
   Check, X, CircleCheck, CircleX, Lightbulb, RotateCcw,
   Trophy, PartyPopper, ThumbsUp, BookOpen,
+  Clock, Shuffle, History, Trash2,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
         Zap, Play, ChevronLeft, ChevronRight,
         Check, X, CircleCheck, CircleX, Lightbulb, RotateCcw,
         Trophy, PartyPopper, ThumbsUp, BookOpen,
+        Clock, Shuffle, History, Trash2,
       }),
     },
   ],

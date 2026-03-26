@@ -33,7 +33,7 @@
     </div>
 
     <!-- Answer review -->
-    <div class="flex flex-col gap-3 mb-8 max-h-72 overflow-y-auto pr-1">
+    <div class="flex flex-col gap-3 mb-6 max-h-72 overflow-y-auto pr-1">
       @for (q of questions(); track q.id; let i = $index) {
         @let userAnswer = answers()[i];
         @let isCorrect = userAnswer === q.correctIndex;
@@ -58,6 +58,47 @@
               <lucide-icon name="circle-check" [size]="15"></lucide-icon>
               {{ i18n.t().result.correctAnswer }} {{ q.options[q.correctIndex] }}
             </p>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Score history -->
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center gap-1.5 text-sm font-semibold text-gray-600">
+          <lucide-icon name="history" [size]="16"></lucide-icon>
+          {{ i18n.t().history.title }}
+        </div>
+        @if (history.entries().length > 0) {
+          <button
+            (click)="history.clear()"
+            class="flex items-center gap-1 text-xs text-gray-400 hover:text-red-500 transition-colors"
+          >
+            <lucide-icon name="trash-2" [size]="13"></lucide-icon>
+            {{ i18n.t().history.clear }}
+          </button>
+        }
+      </div>
+
+      @if (history.entries().length === 0) {
+        <p class="text-xs text-gray-400 text-center py-3">{{ i18n.t().history.empty }}</p>
+      } @else {
+        <div class="flex flex-col gap-1.5">
+          @for (entry of history.entries(); track entry.date; let i = $index) {
+            <div
+              class="flex items-center justify-between px-3 py-2 rounded-lg text-xs"
+              [class]="i === 0 ? 'bg-indigo-50 border border-indigo-100' : 'bg-gray-50'"
+            >
+              <span class="text-gray-500">{{ formatDate(entry.date) }}</span>
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-gray-700">{{ entry.score }}/{{ entry.total }}</span>
+                <span
+                  class="font-bold px-1.5 py-0.5 rounded"
+                  [class]="entry.percent === 100 ? 'text-yellow-600 bg-yellow-50' : entry.percent >= 80 ? 'text-green-600 bg-green-50' : entry.percent >= 60 ? 'text-blue-600 bg-blue-50' : 'text-red-500 bg-red-50'"
+                >{{ entry.percent }}%</span>
+              </div>
+            </div>
           }
         </div>
       }

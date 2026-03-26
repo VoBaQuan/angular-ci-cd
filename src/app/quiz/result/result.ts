@@ -1,6 +1,7 @@
 import { Component, computed, inject, input, output } from '@angular/core';
 import { QuizQuestion } from '../quiz.model';
 import { I18nService } from '../../i18n/i18n.service';
+import { HistoryService } from '../history.service';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
@@ -10,6 +11,7 @@ import { LucideAngularModule } from 'lucide-angular';
 })
 export class ResultComponent {
   protected readonly i18n = inject(I18nService);
+  protected readonly history = inject(HistoryService);
 
   // signal-based inputs
   score = input.required<number>();
@@ -47,4 +49,8 @@ export class ResultComponent {
   protected readonly dashOffset = computed(
     () => this.circumference * (1 - this.percent() / 100)
   );
+
+  protected formatDate(iso: string): string {
+    return new Date(iso).toLocaleString();
+  }
 }
