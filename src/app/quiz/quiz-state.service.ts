@@ -38,6 +38,7 @@ export class QuizStateService {
   readonly currentIndex = signal(0);
   readonly answers = signal<(number | null)[]>([]);
   readonly timeLeft = signal(TIMER_DURATION);
+  readonly slideDirection = signal<'left' | 'right'>('right');
 
   // ── Timer (imperative, not effect-based) ─────────────────────────────────
   private timerId: ReturnType<typeof setInterval> | null = null;
@@ -112,6 +113,7 @@ export class QuizStateService {
       this.historyService.add(this.score(), this.total());
       this.status.set('finished');
     } else {
+      this.slideDirection.set('right');
       this.currentIndex.update((i) => i + 1);
       this.startTimerIfCurrentUnanswered();
     }
@@ -119,6 +121,7 @@ export class QuizStateService {
 
   prev(): void {
     if (this.currentIndex() > 0) {
+      this.slideDirection.set('left');
       this.currentIndex.update((i) => i - 1);
       this.startTimerIfCurrentUnanswered();
     }
@@ -168,6 +171,7 @@ export class QuizStateService {
       this.historyService.add(this.score(), this.total());
       this.status.set('finished');
     } else {
+      this.slideDirection.set('right');
       this.currentIndex.update((i) => i + 1);
       this.startTimerIfEnabled();
     }

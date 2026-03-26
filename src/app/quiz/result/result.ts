@@ -3,11 +3,13 @@ import { QuizQuestion } from '../quiz.model';
 import { I18nService } from '../../i18n/i18n.service';
 import { HistoryService } from '../history.service';
 import { LucideAngularModule } from 'lucide-angular';
+import { fadeIn } from '../../animations';
 
 @Component({
   selector: 'app-result',
   imports: [LucideAngularModule],
   templateUrl: './result.html',
+  animations: [fadeIn],
 })
 export class ResultComponent {
   protected readonly i18n = inject(I18nService);

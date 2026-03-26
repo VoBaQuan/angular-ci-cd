@@ -31,11 +31,12 @@
       [total]="quiz.total()"
       [timeLeft]="quiz.timeLeft()"
       [timerEnabled]="quiz.timerEnabled()"
+      [slideDirection]="quiz.slideDirection()"
       (answerSelected)="quiz.selectAnswer($event)"
     />
 
     <!-- Navigation footer -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 shadow-lg px-6 py-4 flex justify-between items-center max-w-xl mx-auto">
+    <div [@fadeIn] class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 shadow-lg px-6 py-4 flex justify-between items-center max-w-xl mx-auto">
       <button
         (click)="quiz.prev()"
         [disabled]="quiz.currentIndex() === 0"

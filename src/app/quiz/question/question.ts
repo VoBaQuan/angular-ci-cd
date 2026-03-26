@@ -3,11 +3,13 @@ import { DecimalPipe } from '@angular/common';
 import { QuizQuestion } from '../quiz.model';
 import { I18nService } from '../../i18n/i18n.service';
 import { LucideAngularModule } from 'lucide-angular';
+import { fadeIn, questionSlide } from '../../animations';
 
 @Component({
   selector: 'app-question',
   imports: [DecimalPipe, LucideAngularModule],
   templateUrl: './question.html',
+  animations: [fadeIn, questionSlide],
 })
 export class QuestionComponent {
   protected readonly i18n = inject(I18nService);
@@ -19,6 +21,7 @@ export class QuestionComponent {
   total = input.required<number>();
   timeLeft = input<number>(30);
   timerEnabled = input<boolean>(false);
+  slideDirection = input<'left' | 'right'>('right');
 
   // signal-based output
   answerSelected = output<number>();
@@ -27,6 +30,11 @@ export class QuestionComponent {
   protected readonly progressPercent = computed(
     () => ((this.currentIndex() + 1) / this.total()) * 100
   );
+
+  protected readonly slideState = computed(() => ({
+    value: this.currentIndex(),
+    params: { fromX: this.slideDirection() === 'right' ? '48px' : '-48px' },
+  }));
 
   protected optionState(index: number): 'default' | 'correct' | 'wrong' | 'dimmed' {
     const selected = this.selectedAnswer();
