@@ -8,6 +8,7 @@ import {
   Check, X, CircleCheck, CircleX, Lightbulb, RotateCcw,
   Trophy, PartyPopper, ThumbsUp, BookOpen,
   Clock, Shuffle, History, Trash2,
+  Sun, Moon,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig = {
         Check, X, CircleCheck, CircleX, Lightbulb, RotateCcw,
         Trophy, PartyPopper, ThumbsUp, BookOpen,
         Clock, Shuffle, History, Trash2,
+        Sun, Moon,
       }),
     },
   ],

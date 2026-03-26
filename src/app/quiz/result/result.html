@@ -1,12 +1,12 @@
-<div class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 p-4">
-  <div class="bg-white rounded-3xl shadow-xl p-8 max-w-xl w-full">
+<div class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 dark:from-gray-900 dark:to-gray-800 p-4">
+  <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8 max-w-xl w-full">
 
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">{{ i18n.t().result.title }}</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-6">{{ i18n.t().result.title }}</h2>
 
     <!-- Score ring -->
     <div class="flex justify-center mb-4">
       <svg width="120" height="120" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10" />
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#374151" stroke-width="10" class="dark:stroke-gray-600 stroke-gray-200" />
         <circle
           cx="50" cy="50" r="40" fill="none"
           [class]="ringColor()"
@@ -17,14 +17,14 @@
           transform="rotate(-90 50 50)"
           style="transition: stroke-dashoffset 0.8s ease"
         />
-        <text x="50" y="55" text-anchor="middle" class="text-lg font-bold" font-size="18" font-weight="bold" fill="#4f46e5">
+        <text x="50" y="55" text-anchor="middle" font-size="18" font-weight="bold" fill="#6366f1">
           {{ percent() }}%
         </text>
       </svg>
     </div>
 
     <!-- Score text -->
-    <p class="text-center text-4xl font-bold text-indigo-700 mb-1">
+    <p class="text-center text-4xl font-bold text-indigo-700 dark:text-indigo-400 mb-1">
       {{ score() }} / {{ total() }}
     </p>
     <div class="flex items-center justify-center gap-2 mb-6" [class]="message().color">
@@ -39,22 +39,22 @@
         @let isCorrect = userAnswer === q.correctIndex;
         <div
           class="rounded-xl border px-4 py-3 text-sm"
-          [class]="isCorrect ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'"
+          [class]="isCorrect ? 'border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20' : 'border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20'"
         >
-          <p class="font-medium text-gray-700 mb-1">
+          <p class="font-medium text-gray-700 dark:text-gray-300 mb-1">
             {{ i + 1 }}. {{ q.question }}
           </p>
           @if (isCorrect) {
-            <p class="flex items-center gap-1.5 text-green-700">
+            <p class="flex items-center gap-1.5 text-green-700 dark:text-green-400">
               <lucide-icon name="circle-check" [size]="15"></lucide-icon>
               {{ q.options[q.correctIndex] }}
             </p>
           } @else {
-            <p class="flex items-center gap-1.5 text-red-600">
+            <p class="flex items-center gap-1.5 text-red-600 dark:text-red-400">
               <lucide-icon name="circle-x" [size]="15"></lucide-icon>
               {{ i18n.t().result.youChose }} {{ userAnswer !== null ? q.options[userAnswer!] : i18n.t().result.notAnswered }}
             </p>
-            <p class="flex items-center gap-1.5 text-green-700 mt-1">
+            <p class="flex items-center gap-1.5 text-green-700 dark:text-green-400 mt-1">
               <lucide-icon name="circle-check" [size]="15"></lucide-icon>
               {{ i18n.t().result.correctAnswer }} {{ q.options[q.correctIndex] }}
             </p>
@@ -66,7 +66,7 @@
     <!-- Score history -->
     <div class="mb-6">
       <div class="flex items-center justify-between mb-2">
-        <div class="flex items-center gap-1.5 text-sm font-semibold text-gray-600">
+        <div class="flex items-center gap-1.5 text-sm font-semibold text-gray-600 dark:text-gray-300">
           <lucide-icon name="history" [size]="16"></lucide-icon>
           {{ i18n.t().history.title }}
         </div>
@@ -82,20 +82,20 @@
       </div>
 
       @if (history.entries().length === 0) {
-        <p class="text-xs text-gray-400 text-center py-3">{{ i18n.t().history.empty }}</p>
+        <p class="text-xs text-gray-400 dark:text-gray-500 text-center py-3">{{ i18n.t().history.empty }}</p>
       } @else {
         <div class="flex flex-col gap-1.5">
           @for (entry of history.entries(); track entry.date; let i = $index) {
             <div
               class="flex items-center justify-between px-3 py-2 rounded-lg text-xs"
-              [class]="i === 0 ? 'bg-indigo-50 border border-indigo-100' : 'bg-gray-50'"
+              [class]="i === 0 ? 'bg-indigo-50 border border-indigo-100 dark:bg-indigo-900/30 dark:border-indigo-800' : 'bg-gray-50 dark:bg-gray-700'"
             >
-              <span class="text-gray-500">{{ formatDate(entry.date) }}</span>
+              <span class="text-gray-500 dark:text-gray-400">{{ formatDate(entry.date) }}</span>
               <div class="flex items-center gap-2">
-                <span class="font-medium text-gray-700">{{ entry.score }}/{{ entry.total }}</span>
+                <span class="font-medium text-gray-700 dark:text-gray-300">{{ entry.score }}/{{ entry.total }}</span>
                 <span
                   class="font-bold px-1.5 py-0.5 rounded"
-                  [class]="entry.percent === 100 ? 'text-yellow-600 bg-yellow-50' : entry.percent >= 80 ? 'text-green-600 bg-green-50' : entry.percent >= 60 ? 'text-blue-600 bg-blue-50' : 'text-red-500 bg-red-50'"
+                  [class]="entry.percent === 100 ? 'text-yellow-600 bg-yellow-50 dark:bg-yellow-900/30' : entry.percent >= 80 ? 'text-green-600 bg-green-50 dark:bg-green-900/30' : entry.percent >= 60 ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/30' : 'text-red-500 bg-red-50 dark:bg-red-900/30'"
                 >{{ entry.percent }}%</span>
               </div>
             </div>

@@ -1,25 +1,25 @@
-<div class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 p-4">
-  <div class="bg-white rounded-3xl shadow-xl p-8 max-w-xl w-full">
+<div class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 dark:from-gray-900 dark:to-gray-800 p-4">
+  <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8 max-w-xl w-full">
 
     <!-- Progress header -->
-    <div class="flex items-center justify-between mb-3 text-sm font-medium text-gray-500">
+    <div class="flex items-center justify-between mb-3 text-sm font-medium text-gray-500 dark:text-gray-400">
       <span>{{ i18n.t().question.label }} {{ currentIndex() + 1 }} / {{ total() }}</span>
       <div class="flex items-center gap-2">
         @if (timerEnabled()) {
           <span
             class="flex items-center gap-1 px-2 py-0.5 rounded-lg font-bold text-sm transition-colors"
-            [class]="timeLeft() <= 10 ? 'bg-red-100 text-red-600' : 'bg-indigo-50 text-indigo-600'"
+            [class]="timeLeft() <= 10 ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400' : 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400'"
           >
             <lucide-icon name="clock" [size]="14"></lucide-icon>
             {{ timeLeft() }}{{ i18n.t().timer.sec }}
           </span>
         }
-        <span class="text-indigo-600 font-semibold">{{ progressPercent() | number: '1.0-0' }}%</span>
+        <span class="text-indigo-600 dark:text-indigo-400 font-semibold">{{ progressPercent() | number: '1.0-0' }}%</span>
       </div>
     </div>
 
     <!-- Progress bar -->
-    <div class="w-full bg-gray-100 rounded-full h-2 mb-8 overflow-hidden">
+    <div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 mb-8 overflow-hidden">
       <div
         class="bg-indigo-500 h-2 rounded-full transition-all duration-500"
         [style.width.%]="progressPercent()"
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Question -->
-    <h2 class="text-lg font-semibold text-gray-800 mb-6 leading-relaxed">
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-6 leading-relaxed">
       {{ question().question }}
     </h2>
 
@@ -41,17 +41,17 @@
           [class]="optionClass($index)"
         >
           <span>
-            <span class="mr-3 font-bold text-gray-400">
+            <span class="mr-3 font-bold text-gray-400 dark:text-gray-500">
               {{ ['A', 'B', 'C', 'D'][$index] }}.
             </span>
             {{ option }}
           </span>
 
           @if (state === 'correct') {
-            <lucide-icon name="circle-check" [size]="18" class="float-right text-green-600"></lucide-icon>
+            <lucide-icon name="circle-check" [size]="18" class="float-right text-green-600 dark:text-green-400"></lucide-icon>
           }
           @if (state === 'wrong') {
-            <lucide-icon name="circle-x" [size]="18" class="float-right text-red-500"></lucide-icon>
+            <lucide-icon name="circle-x" [size]="18" class="float-right text-red-500 dark:text-red-400"></lucide-icon>
           }
         </button>
       }
@@ -62,7 +62,7 @@
       @let isCorrect = selectedAnswer() === question().correctIndex;
       <div
         class="flex items-start gap-2 rounded-xl px-4 py-3 mb-6 text-sm font-medium"
-        [class]="isCorrect ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'"
+        [class]="isCorrect ? 'bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400'"
       >
         @if (isCorrect) {
           <lucide-icon name="circle-check" [size]="18" class="shrink-0 mt-0.5"></lucide-icon>

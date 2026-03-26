@@ -1,45 +1,45 @@
-<div class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 p-4">
-  <div class="bg-white rounded-3xl shadow-xl p-10 max-w-md w-full text-center">
+<div class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 dark:from-gray-900 dark:to-gray-800 p-4">
+  <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-10 max-w-md w-full text-center">
     <!-- Icon -->
     <div class="flex justify-center mb-6">
       <lucide-icon name="zap" [size]="64" class="text-indigo-500"></lucide-icon>
     </div>
 
-    <h1 class="text-3xl font-bold text-indigo-700 mb-2">Angular Signals Quiz</h1>
-    <p class="text-gray-500 mb-8">{{ i18n.t().start.subtitle }}</p>
+    <h1 class="text-3xl font-bold text-indigo-700 dark:text-indigo-400 mb-2">Angular Signals Quiz</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">{{ i18n.t().start.subtitle }}</p>
 
     @if (quiz.loading()) {
       <p class="text-indigo-400 animate-pulse mb-6">{{ i18n.t().start.loading }}</p>
     } @else {
-      <div class="flex justify-center gap-6 mb-6 text-sm text-gray-600">
+      <div class="flex justify-center gap-6 mb-6 text-sm text-gray-600 dark:text-gray-400">
         <div class="flex flex-col items-center gap-1">
-          <span class="text-2xl font-bold text-indigo-600">{{ quiz.total() }}</span>
+          <span class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ quiz.total() }}</span>
           <span>{{ i18n.t().start.questions }}</span>
         </div>
-        <div class="w-px bg-gray-200"></div>
+        <div class="w-px bg-gray-200 dark:bg-gray-600"></div>
         <div class="flex flex-col items-center gap-1">
-          <span class="text-2xl font-bold text-indigo-600">4</span>
+          <span class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">4</span>
           <span>{{ i18n.t().start.optionsPerQ }}</span>
         </div>
-        <div class="w-px bg-gray-200"></div>
+        <div class="w-px bg-gray-200 dark:bg-gray-600"></div>
         <div class="flex flex-col items-center gap-1">
-          <span class="text-2xl font-bold text-indigo-600">1</span>
+          <span class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">1</span>
           <span>{{ i18n.t().start.oneChoice }}</span>
         </div>
       </div>
 
       <!-- Settings toggles -->
       <div class="flex flex-col gap-3 mb-8">
-        <div class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-gray-50 border border-gray-200">
+        <div class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
           <div class="flex items-center gap-2">
             <lucide-icon name="shuffle" [size]="18" class="text-indigo-500"></lucide-icon>
-            <span class="text-sm font-medium text-gray-700">{{ i18n.t().controls.shuffle }}</span>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ i18n.t().controls.shuffle }}</span>
           </div>
           <button
             type="button"
             (click)="quiz.shuffleEnabled.set(!quiz.shuffleEnabled())"
             class="relative w-11 h-6 rounded-full transition-colors duration-200"
-            [class]="quiz.shuffleEnabled() ? 'bg-indigo-600' : 'bg-gray-300'"
+            [class]="quiz.shuffleEnabled() ? 'bg-indigo-600' : 'bg-gray-300 dark:bg-gray-500'"
           >
             <span
               class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"
@@ -48,16 +48,16 @@
           </button>
         </div>
 
-        <div class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-gray-50 border border-gray-200">
+        <div class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
           <div class="flex items-center gap-2">
             <lucide-icon name="clock" [size]="18" class="text-indigo-500"></lucide-icon>
-            <span class="text-sm font-medium text-gray-700">{{ i18n.t().controls.timer }}</span>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ i18n.t().controls.timer }}</span>
           </div>
           <button
             type="button"
             (click)="quiz.timerEnabled.set(!quiz.timerEnabled())"
             class="relative w-11 h-6 rounded-full transition-colors duration-200"
-            [class]="quiz.timerEnabled() ? 'bg-indigo-600' : 'bg-gray-300'"
+            [class]="quiz.timerEnabled() ? 'bg-indigo-600' : 'bg-gray-300 dark:bg-gray-500'"
           >
             <span
               class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"
@@ -76,6 +76,6 @@
       </button>
     }
 
-    <p class="text-xs text-gray-400 mt-6">{{ i18n.t().start.note }}</p>
+    <p class="text-xs text-gray-400 dark:text-gray-500 mt-6">{{ i18n.t().start.note }}</p>
   </div>
 </div>
