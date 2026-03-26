@@ -49,7 +49,11 @@ jobs:
       - name: Build
         run: npm run build -- --base-href /angular-signal-quiz/
 
-      # 7. Upload artifact to use in job CD
+      # 7. Copy index.html → 404.html for SPA routing on GitHub Pages
+      - name: Create 404.html
+        run: cp dist/test-cicd/browser/index.html dist/test-cicd/browser/404.html
+
+      # 8. Upload artifact to use in job CD
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
