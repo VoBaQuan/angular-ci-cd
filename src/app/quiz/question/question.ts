@@ -2,10 +2,11 @@ import { Component, computed, inject, input, output } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { QuizQuestion } from '../quiz.model';
 import { I18nService } from '../../i18n/i18n.service';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-question',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, LucideAngularModule],
   templateUrl: './question.html',
 })
 export class QuestionComponent {
@@ -34,7 +35,7 @@ export class QuestionComponent {
   }
 
   protected optionClass(index: number): string {
-    const base = 'w-full text-left px-5 py-3 rounded-xl border-2 font-medium transition-all duration-200';
+    const base = 'w-full text-left px-5 py-3 rounded-xl border-2 font-medium transition-all duration-200 flex items-center justify-between';
     const state = this.optionState(index);
     const variants: Record<string, string> = {
       correct: 'border-green-500 bg-green-50 text-green-800',

@@ -1,9 +1,11 @@
 import { Component, computed, inject, input, output } from '@angular/core';
 import { QuizQuestion } from '../quiz.model';
 import { I18nService } from '../../i18n/i18n.service';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-result',
+  imports: [LucideAngularModule],
   templateUrl: './result.html',
 })
 export class ResultComponent {
@@ -26,10 +28,10 @@ export class ResultComponent {
   protected readonly message = computed(() => {
     const p = this.percent();
     const t = this.i18n.t().result;
-    if (p === 100) return { text: t.perfect, color: 'text-yellow-600' };
-    if (p >= 80)   return { text: t.great, color: 'text-green-600' };
-    if (p >= 60)   return { text: t.good, color: 'text-blue-600' };
-    return { text: t.needPractice, color: 'text-red-500' };
+    if (p === 100) return { text: t.perfect, color: 'text-yellow-600', icon: 'trophy' };
+    if (p >= 80)   return { text: t.great,   color: 'text-green-600',  icon: 'party-popper' };
+    if (p >= 60)   return { text: t.good,     color: 'text-blue-600',   icon: 'thumbs-up' };
+    return         { text: t.needPractice,    color: 'text-red-500',    icon: 'book-open' };
   });
 
   protected readonly ringColor = computed(() => {

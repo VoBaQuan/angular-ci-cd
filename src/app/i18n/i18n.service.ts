@@ -1,21 +1,19 @@
-import { computed, effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { computed, effect, Injectable, signal } from '@angular/core';
 import { Lang, LANG_FLAGS, LANG_LABELS, TRANSLATIONS } from './translations';
 
 const STORAGE_KEY = 'quiz-lang';
 const VALID_LANGS: Lang[] = ['en', 'vi', 'zh'];
+const hasStorage = typeof localStorage !== 'undefined';
 
-function getInitialLang(isBrowser: boolean): Lang {
-  if (!isBrowser) return 'en';
+function getInitialLang(): Lang {
+  if (!hasStorage) return 'en';
   const stored = localStorage.getItem(STORAGE_KEY) as Lang | null;
   return stored && VALID_LANGS.includes(stored) ? stored : 'en';
 }
 
 @Injectable({ providedIn: 'root' })
 export class I18nService {
-  private readonly platformId = inject(PLATFORM_ID);
-
-  readonly lang = signal<Lang>(getInitialLang(isPlatformBrowser(this.platformId)));
+  readonly lang = signal<Lang>(getInitialLang());
   readonly t = computed(() => TRANSLATIONS[this.lang()]);
 
   readonly langs: Lang[] = VALID_LANGS;
@@ -24,7 +22,7 @@ export class I18nService {
 
   constructor() {
     effect(() => {
-      if (isPlatformBrowser(this.platformId)) {
+      if (hasStorage) {
         localStorage.setItem(STORAGE_KEY, this.lang());
       }
     });

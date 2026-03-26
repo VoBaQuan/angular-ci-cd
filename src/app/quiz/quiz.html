@@ -30,8 +30,9 @@
       <button
         (click)="quiz.prev()"
         [disabled]="quiz.currentIndex() === 0"
-        class="px-5 py-2 rounded-xl border-2 border-gray-200 text-gray-600 font-medium hover:border-indigo-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        class="flex items-center gap-1.5 px-5 py-2 rounded-xl border-2 border-gray-200 text-gray-600 font-medium hover:border-indigo-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
+        <lucide-icon name="chevron-left" [size]="16"></lucide-icon>
         {{ i18n.t().quiz.back }}
       </button>
 
@@ -42,9 +43,15 @@
       <button
         (click)="quiz.next()"
         [disabled]="!quiz.isAnswered()"
-        class="px-5 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        class="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
-        @if (quiz.isLastQuestion()) { {{ i18n.t().quiz.seeResults }} } @else { {{ i18n.t().quiz.next }} }
+        @if (quiz.isLastQuestion()) {
+          {{ i18n.t().quiz.seeResults }}
+          <lucide-icon name="chevron-right" [size]="16"></lucide-icon>
+        } @else {
+          {{ i18n.t().quiz.next }}
+          <lucide-icon name="chevron-right" [size]="16"></lucide-icon>
+        }
       </button>
     </div>
   }

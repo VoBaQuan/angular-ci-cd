@@ -29,13 +29,19 @@
           [disabled]="selectedAnswer() !== null"
           [class]="optionClass($index)"
         >
-          <span class="mr-3 font-bold text-gray-400">
-            {{ ['A', 'B', 'C', 'D'][$index] }}.
+          <span>
+            <span class="mr-3 font-bold text-gray-400">
+              {{ ['A', 'B', 'C', 'D'][$index] }}.
+            </span>
+            {{ option }}
           </span>
-          {{ option }}
 
-          @if (state === 'correct') { <span class="float-right">✅</span> }
-          @if (state === 'wrong')   { <span class="float-right">❌</span> }
+          @if (state === 'correct') {
+            <lucide-icon name="circle-check" [size]="18" class="float-right text-green-600"></lucide-icon>
+          }
+          @if (state === 'wrong') {
+            <lucide-icon name="circle-x" [size]="18" class="float-right text-red-500"></lucide-icon>
+          }
         </button>
       }
     </div>
@@ -44,13 +50,15 @@
     @if (selectedAnswer() !== null) {
       @let isCorrect = selectedAnswer() === question().correctIndex;
       <div
-        class="rounded-xl px-4 py-3 mb-6 text-sm font-medium"
+        class="flex items-start gap-2 rounded-xl px-4 py-3 mb-6 text-sm font-medium"
         [class]="isCorrect ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'"
       >
         @if (isCorrect) {
-          {{ i18n.t().question.correct }}
+          <lucide-icon name="circle-check" [size]="18" class="shrink-0 mt-0.5"></lucide-icon>
+          <span>{{ i18n.t().question.correct }}</span>
         } @else {
-          {{ i18n.t().question.wrongPrefix }} <strong>{{ question().options[question().correctIndex] }}</strong>
+          <lucide-icon name="lightbulb" [size]="18" class="shrink-0"></lucide-icon>
+          <span>{{ i18n.t().question.wrongPrefix }} <strong>{{ question().options[question().correctIndex] }}</strong></span>
         }
       </div>
     }

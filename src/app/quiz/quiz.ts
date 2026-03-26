@@ -4,10 +4,11 @@ import { StartComponent } from './start/start';
 import { QuestionComponent } from './question/question';
 import { ResultComponent } from './result/result';
 import { I18nService } from '../i18n/i18n.service';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-quiz',
-  imports: [StartComponent, QuestionComponent, ResultComponent],
+  imports: [StartComponent, QuestionComponent, ResultComponent, LucideAngularModule],
   templateUrl: './quiz.html',
 })
 export class QuizComponent {

@@ -13,7 +13,7 @@ export class QuizStateService {
   private readonly i18n = inject(I18nService);
 
   // ── Simulate async loading with toSignal() ──────────────────────────────
-  private readonly rawQuestions$ = of(QUIZ_QUESTIONS).pipe(delay(600));
+  private readonly rawQuestions$ = of(QUIZ_QUESTIONS).pipe(delay(1000));
   private readonly rawQuestions = toSignal(this.rawQuestions$, {
     initialValue: [] as MultiLangQuizQuestion[],
   });
