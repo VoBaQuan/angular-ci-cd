@@ -10,7 +10,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "test-cicd": {
+    "angular-signal-quiz": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -68,10 +68,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "test-cicd:build:production"
+              "buildTarget": "angular-signal-quiz:build:production"
             },
             "development": {
-              "buildTarget": "test-cicd:build:development"
+              "buildTarget": "angular-signal-quiz:build:development"
             }
           },
           "defaultConfiguration": "development"

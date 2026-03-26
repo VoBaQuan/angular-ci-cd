@@ -51,13 +51,13 @@ jobs:
 
       # 7. Copy index.html → 404.html for SPA routing on GitHub Pages
       - name: Create 404.html
-        run: cp dist/test-cicd/browser/index.html dist/test-cicd/browser/404.html
+        run: cp dist/angular-signal-quiz/browser/index.html dist/angular-signal-quiz/browser/404.html
 
       # 8. Upload artifact to use in job CD
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/test-cicd/browser
+          path: dist/angular-signal-quiz/browser
 
   # ─────────────────────────────────────────
   # JOB 2: CD — Deploy to GitHub Pages

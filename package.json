@@ -1,5 +1,5 @@
 {
-  "name": "test-cicd",
+  "name": "angular-signal-quiz",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "vitest run",
-    "serve:ssr:test-cicd": "node dist/test-cicd/server/server.mjs",
+    "serve:ssr:angular-signal-quiz": "node dist/angular-signal-quiz/server/server.mjs",
     "lint": "ng lint"
   },
   "prettier": {

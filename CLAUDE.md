@@ -27,7 +27,7 @@ npm run test:ci
 npx vitest run src/app/app.spec.ts
 
 # Run SSR server (after build)
-npm run serve:ssr:test-cicd
+npm run serve:ssr:angular-signal-quiz
 ```
 
 Angular's build tooling performs type checking during build (`ng build`).
@@ -40,7 +40,7 @@ This is an **Angular 21 SSR application** using standalone components (no NgModu
 - Browser: `src/main.ts` → `app.config.ts` (includes `provideRouter`, `provideClientHydration`)
 - Server: `src/main.server.ts` → `app.config.server.ts` → `src/server.ts` (Express handler via `AngularNodeAppEngine`)
 
-All routes currently use `RenderMode.Prerender` (defined in `app.routes.server.ts`), meaning pages are statically generated at build time. Build outputs to `dist/test-cicd/browser` (static) and `dist/test-cicd/server` (Express SSR). The SSR server listens on the `PORT` env var or defaults to `4000`.
+All routes currently use `RenderMode.Prerender` (defined in `app.routes.server.ts`), meaning pages are statically generated at build time. Build outputs to `dist/angular-signal-quiz/browser` (static) and `dist/angular-signal-quiz/server` (Express SSR). The SSR server listens on the `PORT` env var or defaults to `4000`.
 
 **Key conventions**:
 - Standalone components only — no `NgModule` declarations
@@ -52,7 +52,7 @@ All routes currently use `RenderMode.Prerender` (defined in `app.routes.server.t
 
 **Testing**: Vitest 4 with jsdom environment. Test files live alongside source as `*.spec.ts`. Vitest globals are enabled — no need to import `describe`, `it`, `expect`, etc. Config in `vitest.config.ts` and `tsconfig.spec.json`.
 
-**CI/CD**: GitHub Actions workflow (`.github/workflows/deploy.yml`) runs lint and build on push to `main`, then deploys the `dist/test-cicd/browser` artifact to GitHub Pages with `--base-href /angular-ci-cd/`. Unit tests are currently disabled in the CI pipeline.
+**CI/CD**: GitHub Actions workflow (`.github/workflows/deploy.yml`) runs lint and build on push to `main`, then deploys the `dist/angular-signal-quiz/browser` artifact to GitHub Pages with `--base-href /angular-ci-cd/`. Unit tests are currently disabled in the CI pipeline.
 
 **Code style**: 2-space indent, single quotes, 100-char line width (enforced by `.editorconfig` and Prettier config in `package.json`).
 

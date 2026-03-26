@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { afterNextRender, Component, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -6,4 +7,12 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   template: `<router-outlet />`,
 })
-export class App {}
+export class App {
+  constructor() {
+    if (isPlatformBrowser(inject(PLATFORM_ID))) {
+      afterNextRender(() => {
+        document.documentElement.style.visibility = '';
+      });
+    }
+  }
+}
