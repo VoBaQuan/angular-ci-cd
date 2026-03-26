@@ -1,9 +1,9 @@
-name: 🚀 CI/CD — Angular to GitHub Pages
+name: CI/CD — Angular to GitHub Pages
 
 on:
   push:
     branches:
-      - main   # Tự động chạy khi push lên main
+      - main
 
 permissions:
   contents: read
@@ -26,40 +26,37 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Cài Node.js
+      # 2. install Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      # 3. Cài dependencies
+      # 3. install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4. Kiểm tra ESLint
+      # 4. check ESLint
       - name: Run ESLint
         run: npm run lint
 
-      # 5. Chạy Unit Test (Vitest)
+      # 5. run Unit Test (Vitest)
       # - name: Run Unit Tests
       #   run: npm run test:ci
 
-      # 6. Build production với base-href cho GitHub Pages
+      # 6. Build production with base-href for GitHub Pages
       - name: Build
-        run: npm run build -- --base-href /angular-signal/
-        # ⚠️ Thay angular-ci-cd bằng tên repo GitHub của bạn
+        run: npm run build -- --base-href /angular-signal-quiz/
 
-      # 7. Upload artifact để job CD sử dụng
+      # 7. Upload artifact to use in job CD
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/test-cicd/browser
-          # Nếu lỗi "No such file or directory" thì thử đổi thành dist/test-cicd
 
   # ─────────────────────────────────────────
-  # JOB 2: CD — Deploy lên GitHub Pages
-  # Chỉ chạy nếu JOB 1 pass ✅
+  # JOB 2: CD — Deploy to GitHub Pages
   # ─────────────────────────────────────────
   deploy:
     name: 🌐 Deploy to GitHub Pages

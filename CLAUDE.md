@@ -55,3 +55,12 @@ All routes currently use `RenderMode.Prerender` (defined in `app.routes.server.t
 **CI/CD**: GitHub Actions workflow (`.github/workflows/deploy.yml`) runs lint and build on push to `main`, then deploys the `dist/test-cicd/browser` artifact to GitHub Pages with `--base-href /angular-ci-cd/`. Unit tests are currently disabled in the CI pipeline.
 
 **Code style**: 2-space indent, single quotes, 100-char line width (enforced by `.editorconfig` and Prettier config in `package.json`).
+
+## Quiz Feature
+
+The main feature lives in `src/app/quiz/`. It demonstrates the preferred signal-based state pattern:
+
+- **`QuizStateService`** — single source of truth, provided at root. Holds writable signals (`status`, `currentIndex`, `answers`), derived computed signals (`score`, `progress`, `isLastQuestion`, etc.), and actions (`start`, `selectAnswer`, `next`, `prev`, `restart`).
+- **`QuizStatus`** — state machine: `'idle'` → `'playing'` → `'finished'`. Components switch on `status` to show `<app-start>`, `<app-question>`, or `<app-result>`.
+- **SSR guard pattern**: Any browser API (e.g., `localStorage`) must be gated with `isPlatformBrowser(this.platformId)` — inject `PLATFORM_ID` and check before accessing browser globals.
+- Questions are loaded via `toSignal()` wrapping an RxJS observable (simulates async), with an `initialValue` fallback for SSR.
