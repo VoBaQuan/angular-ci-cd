@@ -53,12 +53,17 @@ export class QuizStateService {
   }
 
   selectAnswer(optionIndex: number): void {
+    console.log(this.answers());
+
     if (this.isAnswered()) return;
     this.answers.update((prev) => {
       const next = [...prev];
       next[this.currentIndex()] = optionIndex;
       return next;
     });
+
+    console.log(this.selectedAnswer());
+    console.log(this.answers());
   }
 
   next(): void {
