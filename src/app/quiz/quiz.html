@@ -109,13 +109,22 @@
 
 <!-- Leave confirmation modal -->
 @if (showConfirm()) {
-  <div
-    class="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+  <!-- Backdrop -->
+  <button
+    type="button"
+    class="fixed inset-0 z-100 w-full bg-black/50 backdrop-blur-sm"
     (click)="cancelLeave()"
+    tabindex="-1"
+    aria-label="Close dialog"
+  ></button>
+  <!-- Dialog card -->
+  <div
+    role="dialog"
+    aria-modal="true"
+    class="fixed inset-0 z-100 flex items-center justify-center p-4 pointer-events-none"
   >
     <div
-      class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 max-w-sm w-full"
-      (click)="$event.stopPropagation()"
+      class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 max-w-sm w-full pointer-events-auto"
     >
       <div class="flex items-center gap-3 mb-4">
         <div class="p-2 rounded-xl bg-amber-100 dark:bg-amber-900/30 shrink-0">
