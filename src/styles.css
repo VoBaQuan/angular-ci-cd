@@ -1,7 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Dynamic primary color palette (updated via JS in ThemeService) */
+@theme inline {
+  --color-primary-50:  var(--app-primary-50);
+  --color-primary-100: var(--app-primary-100);
+  --color-primary-300: var(--app-primary-300);
+  --color-primary-400: var(--app-primary-400);
+  --color-primary-500: var(--app-primary-500);
+  --color-primary-600: var(--app-primary-600);
+  --color-primary-700: var(--app-primary-700);
+  --color-primary-800: var(--app-primary-800);
+  --color-primary-900: var(--app-primary-900);
+}
+
+/* Default palette (indigo) — overridden dynamically by ThemeService */
+:root {
+  --app-primary-50:  #eef2ff;
+  --app-primary-100: #e0e7ff;
+  --app-primary-300: #a5b4fc;
+  --app-primary-400: #818cf8;
+  --app-primary-500: #6366f1;
+  --app-primary-600: #4f46e5;
+  --app-primary-700: #4338ca;
+  --app-primary-800: #3730a3;
+  --app-primary-900: #312e81;
+}
 
 @layer base {
   button:not(:disabled) {

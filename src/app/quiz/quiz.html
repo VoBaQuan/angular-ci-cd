@@ -1,17 +1,36 @@
-<!-- Top bar: theme toggle + language switcher -->
+<!-- Top bar: theme toggle + color picker + language switcher -->
 <div class="fixed top-4 right-4 z-50 flex gap-1 bg-white/80 dark:bg-gray-800/80 backdrop-blur rounded-xl shadow-md p-1">
   <button
     (click)="theme.toggle()"
     class="px-2 py-1 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+    title="Toggle dark mode"
   >
     <lucide-icon [name]="theme.isDark() ? 'sun' : 'moon'" [size]="15"></lucide-icon>
   </button>
+
+  <!-- Color picker -->
+  <label
+    class="flex items-center px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer"
+    title="Pick primary color"
+  >
+    <span
+      class="w-4 h-4 rounded-full border border-gray-300 dark:border-gray-500"
+      [style.background]="theme.primaryColor()"
+    ></span>
+    <input
+      type="color"
+      class="sr-only"
+      [value]="theme.primaryColor()"
+      (input)="theme.setPrimaryColor($any($event.target).value)"
+    />
+  </label>
+
   <div class="w-px bg-gray-200 dark:bg-gray-600 my-1"></div>
   @for (l of i18n.langs; track l) {
     <button
       (click)="i18n.setLang(l)"
       class="px-2 py-1 rounded-lg text-xs font-semibold transition-all"
-      [class]="i18n.lang() === l ? 'bg-indigo-600 text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'"
+      [class]="i18n.lang() === l ? 'bg-primary-600 text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'"
     >
       {{ i18n.langFlags[l] }} {{ i18n.langLabels[l] }}
     </button>
@@ -40,7 +59,7 @@
       <button
         (click)="quiz.prev()"
         [disabled]="quiz.currentIndex() === 0"
-        class="flex items-center gap-1.5 px-5 py-2 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-medium hover:border-indigo-300 dark:hover:border-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        class="flex items-center gap-1.5 px-5 py-2 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-medium hover:border-primary-300 dark:hover:border-primary-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
         <lucide-icon name="chevron-left" [size]="16"></lucide-icon>
         {{ i18n.t().quiz.back }}
@@ -53,7 +72,7 @@
       <button
         (click)="quiz.next()"
         [disabled]="!quiz.isAnswered()"
-        class="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        class="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-primary-600 text-white font-medium hover:bg-primary-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
         @if (quiz.isLastQuestion()) {
           {{ i18n.t().quiz.seeResults }}

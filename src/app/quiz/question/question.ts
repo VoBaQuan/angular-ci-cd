@@ -51,7 +51,7 @@ export class QuestionComponent {
       correct: 'border-green-500 bg-green-50 text-green-800 dark:bg-green-900/30 dark:border-green-600 dark:text-green-300',
       wrong:   'border-red-400 bg-red-50 text-red-700 dark:bg-red-900/30 dark:border-red-600 dark:text-red-300',
       dimmed:  'border-gray-200 bg-gray-50 text-gray-400 cursor-default dark:border-gray-600 dark:bg-gray-700 dark:text-gray-500',
-      default: 'border-gray-200 hover:border-indigo-400 hover:bg-indigo-50 text-gray-700 cursor-pointer dark:border-gray-600 dark:hover:border-indigo-500 dark:hover:bg-indigo-900/30 dark:text-gray-300',
+      default: 'border-gray-200 hover:border-primary-400 hover:bg-primary-50 text-gray-700 cursor-pointer dark:border-gray-600 dark:hover:border-primary-500 dark:hover:bg-primary-900/30 dark:text-gray-300',
     };
     return `${base} ${variants[state]}`;
   }

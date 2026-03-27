@@ -1,4 +1,4 @@
-<div [@fadeIn] class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 dark:from-gray-900 dark:to-gray-800 p-4 overflow-hidden">
+<div [@fadeIn] class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-primary-50 to-primary-100 dark:from-gray-900 dark:to-gray-800 p-4 overflow-hidden">
   <div [@questionSlide]="slideState()" class="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8 max-w-xl w-full">
 
     <!-- Progress header -->
@@ -8,20 +8,20 @@
         @if (timerEnabled()) {
           <span
             class="flex items-center gap-1 px-2 py-0.5 rounded-lg font-bold text-sm transition-colors"
-            [class]="timeLeft() <= 10 ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400' : 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400'"
+            [class]="timeLeft() <= 10 ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400' : 'bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400'"
           >
             <lucide-icon name="clock" [size]="14"></lucide-icon>
             {{ timeLeft() }}{{ i18n.t().timer.sec }}
           </span>
         }
-        <span class="text-indigo-600 dark:text-indigo-400 font-semibold">{{ progressPercent() | number: '1.0-0' }}%</span>
+        <span class="text-primary-600 dark:text-primary-400 font-semibold">{{ progressPercent() | number: '1.0-0' }}%</span>
       </div>
     </div>
 
     <!-- Progress bar -->
     <div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 mb-8 overflow-hidden">
       <div
-        class="bg-indigo-500 h-2 rounded-full transition-all duration-500"
+        class="bg-primary-500 h-2 rounded-full transition-all duration-500"
         [style.width.%]="progressPercent()"
       ></div>
     </div>

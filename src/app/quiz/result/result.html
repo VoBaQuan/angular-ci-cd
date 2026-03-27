@@ -1,4 +1,4 @@
-<div [@fadeIn] class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-indigo-50 to-violet-100 dark:from-gray-900 dark:to-gray-800 p-4">
+<div [@fadeIn] class="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-primary-50 to-primary-100 dark:from-gray-900 dark:to-gray-800 p-4">
   <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8 max-w-xl w-full">
 
     <h2 class="text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-6">{{ i18n.t().result.title }}</h2>
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Score text -->
-    <p class="text-center text-4xl font-bold text-indigo-700 dark:text-indigo-400 mb-1">
+    <p class="text-center text-4xl font-bold text-primary-700 dark:text-primary-400 mb-1">
       {{ score() }} / {{ total() }}
     </p>
     <div class="flex items-center justify-center gap-2 mb-6" [class]="message().color">
@@ -88,7 +88,7 @@
           @for (entry of history.entries(); track entry.date; let i = $index) {
             <div
               class="flex items-center justify-between px-3 py-2 rounded-lg text-xs"
-              [class]="i === 0 ? 'bg-indigo-50 border border-indigo-100 dark:bg-indigo-900/30 dark:border-indigo-800' : 'bg-gray-50 dark:bg-gray-700'"
+              [class]="i === 0 ? 'bg-primary-50 border border-primary-100 dark:bg-primary-900/30 dark:border-primary-800' : 'bg-gray-50 dark:bg-gray-700'"
             >
               <span class="text-gray-500 dark:text-gray-400">{{ formatDate(entry.date) }}</span>
               <div class="flex items-center gap-2">
@@ -106,7 +106,7 @@
 
     <button
       (click)="restart.emit()"
-      class="w-full flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-semibold rounded-xl transition-all duration-150 text-base"
+      class="w-full flex items-center justify-center gap-2 py-3 bg-primary-600 hover:bg-primary-700 active:scale-95 text-white font-semibold rounded-xl transition-all duration-150 text-base"
     >
       <lucide-icon name="rotate-ccw" [size]="18"></lucide-icon>
       {{ i18n.t().result.restart }}
