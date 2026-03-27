@@ -1,0 +1,163 @@
+<div [@fadeIn] class="min-h-screen bg-white dark:bg-gray-900">
+
+  <!-- Top bar -->
+  <div class="fixed top-4 right-4 z-50 flex gap-1 bg-white/80 dark:bg-gray-800/80 backdrop-blur rounded-xl shadow-md p-1">
+    <button
+      (click)="theme.toggle()"
+      class="px-2 py-1 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+      title="Toggle dark mode"
+    >
+      <lucide-icon [name]="theme.isDark() ? 'sun' : 'moon'" [size]="15"></lucide-icon>
+    </button>
+    <label
+      class="flex items-center px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer"
+      title="Pick primary color"
+    >
+      <span
+        class="w-4 h-4 rounded-full border border-gray-300 dark:border-gray-500"
+        [style.background]="theme.primaryColor()"
+      ></span>
+      <input
+        type="color"
+        class="sr-only"
+        [value]="theme.primaryColor()"
+        (input)="theme.setPrimaryColor($any($event.target).value)"
+      />
+    </label>
+    <div class="w-px bg-gray-200 dark:bg-gray-600 my-1"></div>
+    @for (l of i18n.langs; track l) {
+      <button
+        (click)="i18n.setLang(l)"
+        class="px-2 py-1 rounded-lg text-xs font-semibold transition-all"
+        [class]="i18n.lang() === l ? 'bg-primary-600 text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'"
+      >
+        {{ i18n.langFlags[l] }} {{ i18n.langLabels[l] }}
+      </button>
+    }
+  </div>
+
+  <!-- ① Hero -->
+  <section class="bg-linear-to-br from-primary-700 via-primary-600 to-primary-900 text-white pt-28 pb-20 px-4 text-center">
+    <div class="max-w-3xl mx-auto">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 text-sm font-medium mb-6">
+        <lucide-icon name="book-open" [size]="14"></lucide-icon>
+        {{ i18n.t().intro.badge }}
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-bold mb-5 leading-tight">
+        {{ i18n.t().intro.hero.title }}
+      </h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+        {{ i18n.t().intro.hero.subtitle }}
+      </p>
+      <lucide-icon name="chevron-down" [size]="24" class="mt-10 text-white/40 animate-bounce inline-block"></lucide-icon>
+    </div>
+  </section>
+
+  <!-- ② Features -->
+  <section class="py-16 px-4 bg-gray-50 dark:bg-gray-800/40">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+          {{ i18n.t().intro.features.title }}
+        </h2>
+        <p class="text-gray-500 dark:text-gray-400">{{ i18n.t().intro.features.subtitle }}</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (f of features(); track f.title) {
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 shrink-0">
+                <lucide-icon [name]="f.icon" [size]="20" [class]="f.color"></lucide-icon>
+              </div>
+              <h3 class="font-semibold text-gray-800 dark:text-gray-100 text-sm">{{ f.title }}</h3>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{{ f.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ Comparison -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-8">
+        {{ i18n.t().intro.compare.title }}
+      </h2>
+      <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+              <th class="text-left px-5 py-3 font-semibold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800">
+                {{ i18n.t().intro.compare.feature }}
+              </th>
+              <th class="px-5 py-3 font-bold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 text-center">
+                Angular
+              </th>
+              <th class="px-5 py-3 font-semibold text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-center">React</th>
+              <th class="px-5 py-3 font-semibold text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-center">Vue</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of compareRows(); track row.feature; let odd = $odd) {
+              <tr
+                class="border-b border-gray-100 dark:border-gray-700/50 last:border-0"
+                [class]="odd ? 'bg-gray-50/60 dark:bg-gray-800/30' : ''"
+              >
+                <td class="px-5 py-3 font-medium text-gray-700 dark:text-gray-300">{{ row.feature }}</td>
+                <td class="px-5 py-3 text-center font-medium text-primary-600 dark:text-primary-400 bg-primary-50/40 dark:bg-primary-900/10">
+                  {{ row.angular }}
+                </td>
+                <td class="px-5 py-3 text-center text-gray-500 dark:text-gray-400">{{ row.react }}</td>
+                <td class="px-5 py-3 text-center text-gray-500 dark:text-gray-400">{{ row.vue }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ Signals deep-dive -->
+  <section class="py-16 px-4 bg-gray-950">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-500/20 text-primary-400 text-sm font-medium mb-4">
+          <lucide-icon name="zap" [size]="13"></lucide-icon>
+          Angular 16+
+        </span>
+        <h2 class="text-2xl font-bold text-white mb-4">{{ i18n.t().intro.signals.title }}</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed text-sm">
+          {{ i18n.t().intro.signals.subtitle }}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        @for (c of signalConcepts(); track c.label) {
+          <div class="bg-gray-900 rounded-2xl p-5 border border-gray-800">
+            <div class="text-primary-400 font-mono text-base font-bold mb-3">{{ c.label }}</div>
+            <pre class="bg-black/60 rounded-xl p-4 text-xs text-green-400 font-mono mb-4 overflow-x-auto leading-relaxed">{{ c.code }}</pre>
+            <p class="text-sm text-gray-400 leading-relaxed">{{ c.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ CTA -->
+  <section class="py-20 px-4 bg-linear-to-br from-primary-600 to-primary-800 text-white text-center">
+    <div class="max-w-xl mx-auto">
+      <lucide-icon name="zap" [size]="44" class="mb-5 inline-block text-yellow-300 drop-shadow-lg"></lucide-icon>
+      <h2 class="text-3xl font-bold mb-4">{{ i18n.t().intro.cta.title }}</h2>
+      <p class="text-white/75 mb-8 text-base leading-relaxed">{{ i18n.t().intro.cta.subtitle }}</p>
+      <button
+        (click)="goToQuiz()"
+        class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-700 font-bold rounded-2xl shadow-xl hover:bg-primary-50 active:scale-95 transition-all duration-150 text-lg"
+      >
+        {{ i18n.t().intro.cta.button }}
+        <lucide-icon name="arrow-right" [size]="20"></lucide-icon>
+      </button>
+    </div>
+  </section>
+
+</div>

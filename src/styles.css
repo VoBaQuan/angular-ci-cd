@@ -31,4 +31,43 @@
   button:not(:disabled) {
     cursor: pointer;
   }
+
+  /* ── Custom scrollbar (Webkit: Chrome, Edge, Safari) ── */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--app-primary-300);
+    border-radius: 999px;
+    transition: background 0.2s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--app-primary-500);
+  }
+
+  /* Dark mode */
+  .dark ::-webkit-scrollbar-thumb {
+    background: var(--app-primary-700);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--app-primary-500);
+  }
+
+  /* ── Firefox ── */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--app-primary-300) transparent;
+  }
+
+  .dark * {
+    scrollbar-color: var(--app-primary-700) transparent;
+  }
 }

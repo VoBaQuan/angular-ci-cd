@@ -5,11 +5,13 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import {
   LUCIDE_ICONS, LucideIconProvider,
-  Zap, Play, ChevronLeft, ChevronRight,
+  Zap, Play, ChevronLeft, ChevronRight, ChevronDown,
   Check, X, CircleCheck, CircleX, Lightbulb, RotateCcw,
   Trophy, PartyPopper, ThumbsUp, BookOpen,
   Clock, Shuffle, History, Trash2,
   Sun, Moon,
+  FileCode, Layers, Terminal, Server, Puzzle, ArrowRight,
+  House, TriangleAlert,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -22,11 +24,13 @@ export const appConfig: ApplicationConfig = {
       provide: LUCIDE_ICONS,
       multi: true,
       useValue: new LucideIconProvider({
-        Zap, Play, ChevronLeft, ChevronRight,
+        Zap, Play, ChevronLeft, ChevronRight, ChevronDown,
         Check, X, CircleCheck, CircleX, Lightbulb, RotateCcw,
         Trophy, PartyPopper, ThumbsUp, BookOpen,
         Clock, Shuffle, History, Trash2,
         Sun, Moon,
+        FileCode, Layers, Terminal, Server, Puzzle, ArrowRight,
+        House, TriangleAlert,
       }),
     },
   ],
