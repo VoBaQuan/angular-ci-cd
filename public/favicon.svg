@@ -1,5 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250">
-  <path fill="#DD0031" d="M125 30L31.9 63.2l14.2 123.1L125 230l78.9-43.7 14.2-123.1z"/>
-  <path fill="#C3002F" d="M125 30v22.2-.1V230l78.9-43.7 14.2-123.1L125 30z"/>
-  <path fill="#fff" d="M125 52.1L66.8 182.6h21.7l11.7-29.2h49.4l11.7 29.2H183L125 52.1zm17 83.3h-34l17-40.9 17 40.9z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#4338CA"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background rounded square (indigo gradient) -->
+  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+
+  <!-- Question mark hook + stem (white) -->
+  <path
+    d="M10,10 C10,3 22,3 22,10 C22,15 16,15 16,18"
+    fill="none"
+    stroke="white"
+    stroke-width="2.8"
+    stroke-linecap="round"
+  />
+
+  <!-- Signal emitter dot — also the "?" dot (amber/gold) -->
+  <circle cx="16" cy="21.5" r="2.2" fill="#FBBF24" filter="url(#glow)"/>
+
+  <!-- Signal wave 1 (inner, brighter) -->
+  <path
+    d="M12,25 C12,28.5 20,28.5 20,25"
+    fill="none"
+    stroke="#FBBF24"
+    stroke-width="2"
+    stroke-linecap="round"
+    opacity="0.75"
+    filter="url(#glow)"
+  />
+
+  <!-- Signal wave 2 (outer, dimmer) -->
+  <path
+    d="M8.5,25 C8.5,32 23.5,32 23.5,25"
+    fill="none"
+    stroke="#FBBF24"
+    stroke-width="2"
+    stroke-linecap="round"
+    opacity="0.35"
+    filter="url(#glow)"
+  />
 </svg>
