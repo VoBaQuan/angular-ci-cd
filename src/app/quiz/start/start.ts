@@ -11,6 +11,6 @@ import { fadeIn } from '../../animations';
   animations: [fadeIn],
 })
 export class StartComponent {
-  protected readonly quiz = inject(QuizStateService);
+  protected readonly quizService = inject(QuizStateService);
   protected readonly i18n = inject(I18nService);
 }

@@ -16,7 +16,7 @@ import { fadeIn } from '../animations';
   animations: [fadeIn],
 })
 export class QuizComponent {
-  protected readonly quiz = inject(QuizStateService);
+  protected readonly quizService = inject(QuizStateService);
   protected readonly i18n = inject(I18nService);
   protected readonly theme = inject(ThemeService);
   private readonly router = inject(Router);
@@ -24,7 +24,7 @@ export class QuizComponent {
   protected readonly showConfirm = signal(false);
 
   protected goHome(): void {
-    if (this.quiz.status() === 'playing') {
+    if (this.quizService.status() === 'playing') {
       this.showConfirm.set(true);
     } else {
       this.router.navigate(['/intro']);
@@ -32,7 +32,7 @@ export class QuizComponent {
   }
 
   protected confirmLeave(): void {
-    this.quiz.restart();
+    this.quizService.restart();
     this.router.navigate(['/intro']);
   }
 

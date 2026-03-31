@@ -48,28 +48,28 @@
   }
 </div>
 
-@switch (quiz.status()) {
+@switch (quizService.status()) {
   @case ('idle') {
     <app-start />
   }
 
   @case ('playing') {
     <app-question
-      [question]="quiz.currentQuestion()"
-      [selectedAnswer]="quiz.selectedAnswer()"
-      [currentIndex]="quiz.currentIndex()"
-      [total]="quiz.total()"
-      [timeLeft]="quiz.timeLeft()"
-      [timerEnabled]="quiz.timerEnabled()"
-      [slideDirection]="quiz.slideDirection()"
-      (answerSelected)="quiz.selectAnswer($event)"
+      [question]="quizService.currentQuestion()"
+      [selectedAnswer]="quizService.selectedAnswer()"
+      [currentIndex]="quizService.currentIndex()"
+      [total]="quizService.total()"
+      [timeLeft]="quizService.timeLeft()"
+      [timerEnabled]="quizService.timerEnabled()"
+      [slideDirection]="quizService.slideDirection()"
+      (answerSelected)="quizService.selectAnswer($event)"
     />
 
     <!-- Navigation footer -->
     <div [@fadeIn] class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 shadow-lg px-6 py-4 flex justify-between items-center max-w-xl mx-auto">
       <button
-        (click)="quiz.prev()"
-        [disabled]="quiz.currentIndex() === 0"
+        (click)="quizService.prev()"
+        [disabled]="quizService.currentIndex() === 0"
         class="flex items-center gap-1.5 px-5 py-2 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-medium hover:border-primary-300 dark:hover:border-primary-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
         <lucide-icon name="chevron-left" [size]="16"></lucide-icon>
@@ -77,15 +77,15 @@
       </button>
 
       <span class="text-xs text-gray-400 dark:text-gray-500">
-        {{ quiz.answers().filter(a => a !== null).length }} / {{ quiz.total() }} {{ i18n.t().quiz.answered }}
+        {{ quizService.answers().filter(a => a !== null).length }} / {{ quizService.total() }} {{ i18n.t().quiz.answered }}
       </span>
 
       <button
-        (click)="quiz.next()"
-        [disabled]="!quiz.isAnswered()"
+        (click)="quizService.next()"
+        [disabled]="!quizService.isAnswered()"
         class="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-primary-600 text-white font-medium hover:bg-primary-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
-        @if (quiz.isLastQuestion()) {
+        @if (quizService.isLastQuestion()) {
           {{ i18n.t().quiz.seeResults }}
           <lucide-icon name="chevron-right" [size]="16"></lucide-icon>
         } @else {
@@ -98,11 +98,11 @@
 
   @case ('finished') {
     <app-result
-      [score]="quiz.score()"
-      [total]="quiz.total()"
-      [questions]="quiz.questions()"
-      [answers]="quiz.answers()"
-      (restart)="quiz.restart()"
+      [score]="quizService.score()"
+      [total]="quizService.total()"
+      [questions]="quizService.questions()"
+      [answers]="quizService.answers()"
+      (restart)="quizService.restart()"
     />
   }
 }

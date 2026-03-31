@@ -8,12 +8,12 @@
     <h1 class="text-3xl font-bold text-primary-700 dark:text-primary-400 mb-2">Angular Signals Quiz</h1>
     <p class="text-gray-500 dark:text-gray-400 mb-8">{{ i18n.t().start.subtitle }}</p>
 
-    @if (quiz.loading()) {
+    @if (quizService.loading()) {
       <p class="text-primary-400 animate-pulse mb-6">{{ i18n.t().start.loading }}</p>
     } @else {
       <div class="flex justify-center gap-6 mb-6 text-sm text-gray-600 dark:text-gray-400">
         <div class="flex flex-col items-center gap-1">
-          <span class="text-2xl font-bold text-primary-600 dark:text-primary-400">{{ quiz.total() }}</span>
+          <span class="text-2xl font-bold text-primary-600 dark:text-primary-400">{{ quizService.total() }}</span>
           <span>{{ i18n.t().start.questions }}</span>
         </div>
         <div class="w-px bg-gray-200 dark:bg-gray-600"></div>
@@ -37,13 +37,13 @@
           </div>
           <button
             type="button"
-            (click)="quiz.shuffleEnabled.set(!quiz.shuffleEnabled())"
+            (click)="quizService.shuffleEnabled.set(!quizService.shuffleEnabled())"
             class="relative w-11 h-6 rounded-full transition-colors duration-200"
-            [class]="quiz.shuffleEnabled() ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-500'"
+            [class]="quizService.shuffleEnabled() ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-500'"
           >
             <span
               class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"
-              [class]="quiz.shuffleEnabled() ? 'translate-x-5' : 'translate-x-0'"
+              [class]="quizService.shuffleEnabled() ? 'translate-x-5' : 'translate-x-0'"
             ></span>
           </button>
         </div>
@@ -55,20 +55,20 @@
           </div>
           <button
             type="button"
-            (click)="quiz.timerEnabled.set(!quiz.timerEnabled())"
+            (click)="quizService.timerEnabled.set(!quizService.timerEnabled())"
             class="relative w-11 h-6 rounded-full transition-colors duration-200"
-            [class]="quiz.timerEnabled() ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-500'"
+            [class]="quizService.timerEnabled() ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-500'"
           >
             <span
               class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"
-              [class]="quiz.timerEnabled() ? 'translate-x-5' : 'translate-x-0'"
+              [class]="quizService.timerEnabled() ? 'translate-x-5' : 'translate-x-0'"
             ></span>
           </button>
         </div>
       </div>
 
       <button
-        (click)="quiz.start()"
+        (click)="quizService.start()"
         class="w-full flex items-center justify-center gap-2 py-3 bg-primary-600 hover:bg-primary-700 active:scale-95 text-white font-semibold rounded-xl transition-all duration-150 text-lg"
       >
         {{ i18n.t().start.start }}
